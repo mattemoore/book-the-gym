@@ -1,0 +1,24 @@
+{
+  "name": "book-the-gym",
+  "version": "1.0.0",
+  "description": "1. Book gym as soon as it is available so we can stay in shape this winter",
+  "main": "index.js",
+  "scripts": {
+    "cypress": "npx cypress open",
+    "test": "npx cypress run --spec './cypress/integration/book-the-gym.js' --browser chrome"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattemoore/book-the-gym.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattemoore/book-the-gym/issues"
+  },
+  "homepage": "https://github.com/mattemoore/book-the-gym#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^8.5.0"
+  }
+}

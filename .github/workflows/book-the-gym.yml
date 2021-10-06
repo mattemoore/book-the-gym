@@ -1,0 +1,36 @@
+name: Book the latest gym slot
+on: 
+  workflow_dispatch:
+  schedule:
+    - cron:  '5 4 * * *'
+
+jobs:
+  buildAndRun:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Write secrets to test data file...
+      run: |
+            mkdir -p ./cypress/fixtures/
+            echo "$FORM_DATA" > ./cypress/fixtures/data.json
+      env:
+        FORM_DATA : ${{secrets.FORM_DATA}}
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm run test
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: ScreenshotsAndVideos
+        path: |
+          ./cypress/screenshots/**/*.png
+          ./cypress/videos/**/*.mp4
+      if: failure()
