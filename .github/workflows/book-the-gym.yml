@@ -1,4 +1,4 @@
-name: Book the latest gym slot
+name: Automated gym booking
 on: 
   workflow_dispatch:
   schedule:

@@ -13,7 +13,7 @@ describe('Automatically book the gym', () => {
       cy.visit(bookingData.url)
     })
 
-    it('Book the 6am slot of the last day that is bookable...', () => {
+    it('Book the first available slot on latest day available...', () => {
 
       // Enter password blocking booking page
       cy.get('#pwbox-331').type(bookingData.password);
@@ -33,14 +33,17 @@ describe('Automatically book the gym', () => {
       cy.get(':nth-child(2) > label > #fieldname11_1').check();
       cy.get('#fieldname5_1').check();
 
-      // Select next month in calendar (is possible if upcoming week spans end of a month)
+      // Select next month in calendar
+      //   NOTE: Does nothing if available days do not span end of a month
+      //   NOTE: Needed to get latest day possible if available days spans end of a month
+      //   NOTE: Improve this naive approach if available days is longer than 36 days
       cy.get('.ui-datepicker-next').click();
 
       // Select last selectable day on calendar
       cy.get('td[data-handler="selectDay"]:last').click();
 
       // Select 6am slot
-      cy.get('[h1="6"] > a').click();
+      cy.get('.availableslot:first > a').click();
       cy.get('.pbSubmit').click();
       cy.wait(5000);
 
