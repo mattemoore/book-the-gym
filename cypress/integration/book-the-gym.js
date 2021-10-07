@@ -10,7 +10,7 @@ describe('Automatically book the gym', () => {
 
     beforeEach(() => {
       cy.log(bookingData.url)
-      cy.visit(bookingData.url)
+      cy.visit(bookingData.url, {timeout:120000})
     })
 
     it('Book the first available slot on latest day available...', () => {
