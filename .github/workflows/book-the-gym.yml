@@ -33,4 +33,5 @@ jobs:
         path: |
           ./cypress/screenshots/**/*.png
           ./cypress/videos/**/*.mp4
+          ./cypress/fixtures/**/*.json
       if: failure()
